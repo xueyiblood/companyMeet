@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户验证处理
@@ -30,6 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //    private SysPermissionService permissionService;
 
     @Override
+    @Transactional(transactionManager = "mfwTransactionManager")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = userService.selectUserByUserName(username);
         if (StringHelper.isNull(user)) {

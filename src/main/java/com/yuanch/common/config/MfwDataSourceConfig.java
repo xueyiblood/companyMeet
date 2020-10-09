@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+/**
+ * 本地数据库
+ */
 @Configuration
 @MapperScan(basePackages = MfwDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "mfwSqlSessionFactory")
 public class MfwDataSourceConfig {

@@ -17,6 +17,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+/**
+ * 查询在押人员数据库
+ */
 @Configuration
 @MapperScan(basePackages = KomoDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "komoSqlSessionFactory")
 public class KomoDataSourceConfig {
