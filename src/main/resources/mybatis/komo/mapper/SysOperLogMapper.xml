@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuanch.project.mapper.komo.SysOperLogMapper">
+
+	<resultMap type="com.yuanch.common.web.domain.entity.SysOperLog" id="SysOperLogResult">
+		<id     property="id"         column="id"        />
+		<result property="title"          column="title"          />
+		<result property="businessType"   column="business_type"  />
+		<result property="method"         column="method"         />
+		<result property="requestMethod"  column="request_method" />
+		<result property="operatorType"   column="operator_type"  />
+		<result property="operName"       column="oper_name"      />
+		<result property="deptName"       column="dept_name"      />
+		<result property="operUrl"        column="oper_url"       />
+		<result property="operIp"         column="oper_ip"        />
+		<result property="operLocation"   column="oper_location"  />
+		<result property="operParam"      column="oper_param"     />
+		<result property="jsonResult"     column="json_result"    />
+		<result property="status"         column="status"         />
+		<result property="errorMsg"       column="error_msg"      />
+		<result property="operTime"       column="oper_time"      />
+	</resultMap>
+
+	<sql id="selectOperLogVo">
+        select id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, oper_time
+        from oper_log
+    </sql>
+    
+	<insert id="insertOperlog" parameterType="com.yuanch.common.web.domain.entity.SysOperLog">
+		insert into oper_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test=" title != null and title != ''">title,</if>
+            <if test="businessType != null">business_type,</if>
+            <if test="method != null">method,</if>
+            <if test="requestMethod != null">request_method,</if>
+            <if test="operatorType != null">operator_type,</if>
+            <if test="operName != null">oper_name,</if>
+            <if test="deptName != null">dept_name,</if>
+            <if test="operUrl != null">oper_url,</if>
+            <if test="operIp != null">oper_ip,</if>
+            <if test="operLocation != null">oper_location,</if>
+            <if test="operParam != null">oper_param,</if>
+            <if test="jsonResult != null">json_result,</if>
+            <if test="status != null">`status`,</if>
+            <if test="errorMsg != null">error_msg,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title!=''">#{title},</if>
+            <if test="businessType != null">#{businessType},</if>
+            <if test="method != null">#{method},</if>
+            <if test="requestMethod != null">#{requestMethod},</if>
+            <if test="operatorType != null">#{operatorType},</if>
+            <if test="operName != null">#{operName},</if>
+            <if test="deptName != null">#{deptName},</if>
+            <if test="operUrl != null">#{operUrl},</if>
+            <if test="operIp != null">#{operIp},</if>
+            <if test="operLocation != null">#{operLocation},</if>
+            <if test="operParam != null">#{operParam},</if>
+            <if test="jsonResult != null">#{jsonResult},</if>
+            <if test="status != null">#{status},</if>
+            <if test="errorMsg != null">#{errorMsg},</if>
+        </trim>
+	</insert>
+	
+	<select id="selectOperLogList" parameterType="com.yuanch.common.web.domain.entity.SysOperLog" resultMap="SysOperLogResult">
+		<include refid="selectOperLogVo"/>
+		<where>
+			<if test="title != null and title != ''">
+				AND title like concat('%', #{title}, '%')
+			</if>
+			<if test="businessType != null and businessType != ''">
+				AND business_type = #{businessType}
+			</if>
+			<if test="businessTypes != null and businessTypes.length > 0">
+			    AND business_type in
+			    <foreach collection="businessTypes" item="businessType" open="(" separator="," close=")">
+		 			#{businessType}
+		        </foreach> 
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="operName != null and operName != ''">
+				AND oper_name like concat('%', #{operName}, '%')
+			</if>
+			<if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+				and date_format(oper_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+			</if>
+			<if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+				and date_format(oper_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+			</if>
+		</where>
+		order by id desc
+	</select>
+	
+	<delete id="deleteOperLogByIds" parameterType="java.lang.Long">
+ 		delete from oper_log where id in
+ 		<foreach collection="array" item="operId" open="(" separator="," close=")">
+ 			#{operId}
+        </foreach> 
+ 	</delete>
+ 	
+ 	<select id="selectOperLogById" parameterType="java.lang.Long" resultMap="SysOperLogResult">
+		<include refid="selectOperLogVo"/>
+		where id = #{operId}
+	</select>
+	
+	<update id="cleanOperLog">
+        truncate table oper_log
+    </update>
+
+</mapper> 

@@ -4,7 +4,7 @@ package com.yuanch.project.service.impl;
 import com.yuanch.common.exception.CustomException;
 import com.yuanch.common.utils.StringHelper;
 import com.yuanch.common.web.domain.entity.SysUser;
-import com.yuanch.project.global.mapper.SysUserMapper;
+import com.yuanch.project.mapper.komo.SysUserMapper;
 import com.yuanch.project.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +44,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 用户对象信息
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public SysUser selectUserByUserName(String userName)
     {
         return userMapper.selectUserByUserName(userName);
@@ -56,6 +57,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 用户对象信息
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public SysUser selectUserById(Long userId)
     {
         return userMapper.selectUserById(userId);
@@ -164,6 +166,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @param user 用户信息
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public void checkUserAllowed(SysUser user)
     {
         if (StringHelper.isNotNull(user.getUserId()) && user.isAdmin())
@@ -179,7 +182,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(transactionManager = "komoTransactionManager")
     public int insertUser(SysUser user)
     {
         // 新增用户信息
@@ -220,6 +223,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int updateUserStatus(SysUser user)
     {
         return userMapper.updateUser(user);
@@ -232,6 +236,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int updateUserProfile(SysUser user)
     {
         return userMapper.updateUser(user);
@@ -245,6 +250,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public boolean updateUserAvatar(String userName, String avatar)
     {
         return userMapper.updateUserAvatar(userName, avatar) > 0;
@@ -257,6 +263,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int resetPwd(SysUser user)
     {
         return userMapper.updateUser(user);
@@ -270,6 +277,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int resetUserPwd(String userName, String password)
     {
         return userMapper.resetUserPwd(userName, password);
@@ -350,6 +358,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int deleteUserByIds(Long[] userIds)
     {
         for (Long userId : userIds)

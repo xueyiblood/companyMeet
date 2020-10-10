@@ -24,7 +24,7 @@ public class MfwDataSourceConfig {
      * 配置多数据源 关键就在这里 这里配置了不同的数据源扫描不同mapper
      */
     static final String PACKAGE = "com.yuanch.project.mapper.mfw";
-    static final String MAPPER_LOCATION = "classpath:mybatis.mfw.mapper.*.xml";
+    static final String MAPPER_LOCATION = "classpath:mybatis/mfw/mapper/*.xml";
 
     /**
      * 连接数据库信息 这个其实更好的是用配置中心完成

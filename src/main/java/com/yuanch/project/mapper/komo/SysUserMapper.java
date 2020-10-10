@@ -1,4 +1,4 @@
-package com.yuanch.project.global.mapper;
+package com.yuanch.project.mapper.komo;
 
 import com.yuanch.common.web.domain.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,10 +1,11 @@
 package com.yuanch.project.service.impl;
 
 import com.yuanch.common.web.domain.entity.SysOperLog;
-import com.yuanch.project.global.mapper.SysOperLogMapper;
+import com.yuanch.project.mapper.komo.SysOperLogMapper;
 import com.yuanch.project.service.SysOperLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class SysOperLogServiceImpl implements SysOperLogService
      * @param operLog 操作日志对象
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public void insertOperlog(SysOperLog operLog)
     {
         operLogMapper.insertOperlog(operLog);
@@ -39,6 +41,7 @@ public class SysOperLogServiceImpl implements SysOperLogService
      * @return 操作日志集合
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public List<SysOperLog> selectOperLogList(@RequestBody SysOperLog operLog)
     {
         return operLogMapper.selectOperLogList(operLog);
@@ -51,6 +54,7 @@ public class SysOperLogServiceImpl implements SysOperLogService
      * @return 结果
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int deleteOperLogByIds(Long[] operIds)
     {
         return operLogMapper.deleteOperLogByIds(operIds);
@@ -63,6 +67,7 @@ public class SysOperLogServiceImpl implements SysOperLogService
      * @return 操作日志对象
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public SysOperLog selectOperLogById(Long operId)
     {
         return operLogMapper.selectOperLogById(operId);
@@ -72,6 +77,7 @@ public class SysOperLogServiceImpl implements SysOperLogService
      * 清空操作日志
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public void cleanOperLog()
     {
         operLogMapper.cleanOperLog();

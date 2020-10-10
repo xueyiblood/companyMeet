@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //    private SysPermissionService permissionService;
 
     @Override
-    @Transactional(transactionManager = "mfwTransactionManager")
+    @Transactional(transactionManager = "komoTransactionManager")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = userService.selectUserByUserName(username);
         if (StringHelper.isNull(user)) {

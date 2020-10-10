@@ -2,10 +2,11 @@ package com.yuanch.project.service.impl;
 
 
 import com.yuanch.common.web.domain.entity.SysLogininfor;
-import com.yuanch.project.global.mapper.SysLogininforMapper;
+import com.yuanch.project.mapper.komo.SysLogininforMapper;
 import com.yuanch.project.service.SysLogininforService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class SysLogininforServiceImpl implements SysLogininforService {
      * @param logininfor 访问日志对象
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public void insertLogininfor(SysLogininfor logininfor)
     {
         logininforMapper.insertLogininfor(logininfor);
@@ -38,6 +40,7 @@ public class SysLogininforServiceImpl implements SysLogininforService {
      * @return 登录记录集合
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public List<SysLogininfor> selectLogininforList(SysLogininfor logininfor)
     {
         return logininforMapper.selectLogininforList(logininfor);
@@ -50,6 +53,7 @@ public class SysLogininforServiceImpl implements SysLogininforService {
      * @return
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public int deleteLogininforByIds(Long[] infoIds)
     {
         return logininforMapper.deleteLogininforByIds(infoIds);
@@ -59,6 +63,7 @@ public class SysLogininforServiceImpl implements SysLogininforService {
      * 清空系统登录日志
      */
     @Override
+    @Transactional(transactionManager = "komoTransactionManager")
     public void cleanLogininfor()
     {
         logininforMapper.cleanLogininfor();

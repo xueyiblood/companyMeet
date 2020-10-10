@@ -37,22 +37,16 @@ spring:
 server:
   port: 7080
 
-mybatis:
-  # 对应实体类的包名
-  type-aliases-package: com.example.druiddemo.dao
-  mapper-locations: classpath:mybatis/mapper/*.xml
-#  config-location: classpath:mybatis/mybatis-config.xml
 
-
-mfw:
-  datasource:
-    username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/pendingjudge?characterEncoding=utf-8
-    driver-class-name: com.mysql.jdbc.Driver
 komo:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/companymeet?characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/companymeet?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver
+mfw:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/pendingjudge?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.jdbc.Driver
