@@ -4,6 +4,7 @@ import com.yuanch.common.web.controller.BaseController;
 import com.yuanch.common.web.domain.AjaxResult;
 import com.yuanch.common.web.domain.page.TableDataInfo;
 import com.yuanch.project.dto.SuspectSearchDTO;
+import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.service.VisitService;
 import com.yuanch.project.vo.SuspectVO;
@@ -42,6 +43,14 @@ public class VisitorController  extends BaseController {
         visitService.deleteVisit(id);
         return AjaxResult.success("删除成功");
     }
+
+    @ApiOperation(value = "保存访客")
+    @PostMapping("addVisits")
+    public AjaxResult addVisits(@RequestBody List<VisitDTO> visitDTOS) {
+        visitService.addVisits(visitDTOS);
+        return AjaxResult.success("添加成功");
+    }
+
 
 
 }

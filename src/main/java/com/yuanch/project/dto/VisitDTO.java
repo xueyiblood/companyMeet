@@ -1,20 +1,14 @@
-package com.yuanch.project.entity;
+package com.yuanch.project.dto;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.yuanch.common.enums.RelationEnum;
 import com.yuanch.common.enums.SexEnum;
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.util.Date;
 
-/**
- * 来访人员实体
- */
 @Data
-public class VisitInfo {
-
-    private Long id;
+public class VisitDTO {
 
     private String name;
 
@@ -34,12 +28,8 @@ public class VisitInfo {
     @EnumValue
     private RelationEnum relation;
 
-    private Integer deleteStatus;
-
-    private Date createTime;
-
-    private Date updateTime;
-
     private Long suspectId;
+
+
 
 }
