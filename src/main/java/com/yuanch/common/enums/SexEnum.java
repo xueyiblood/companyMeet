@@ -2,7 +2,7 @@ package com.yuanch.common.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@JsonFormat
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SexEnum {
     /**
      * 性别女

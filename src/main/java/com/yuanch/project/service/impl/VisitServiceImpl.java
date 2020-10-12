@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class VisitServiceImpl extends ServiceImpl<VisitMapper, VisitInfo> implements VisitService {
+public class VisitServiceImpl implements VisitService {
 
     @Autowired
     private VisitMapper visitMapper;
 
     @Override
-    @Transactional("komoTransactionManager")
+    @Transactional(transactionManager = "komoTransactionManager")
     public List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO) {
         return visitMapper.getVisitList(visitSearchDTO);
     }

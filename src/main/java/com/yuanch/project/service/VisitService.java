@@ -8,6 +8,6 @@ import com.yuanch.project.vo.VisitVO;
 
 import java.util.List;
 
-public interface VisitService extends IService<VisitInfo> {
+public interface VisitService  {
     List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO);
 }
