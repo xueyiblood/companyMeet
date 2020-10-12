@@ -12,4 +12,9 @@
             and vi.suspect_id = #{param.suspectId}
     </select>
 
+
+    <update id="deleteVisit" parameterType="java.lang.Long">
+        UPDATE visit_info set delete_status = 1 where id =#{id}
+    </update>
+
 </mapper>

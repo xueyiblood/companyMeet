@@ -11,4 +11,6 @@ import java.util.List;
 public interface VisitMapper {
 
     List<VisitVO> getVisitList(@Param("param") VisitSearchDTO visitSearchDTO);
+
+    void deleteVisit(@Param("id") Long id);
 }

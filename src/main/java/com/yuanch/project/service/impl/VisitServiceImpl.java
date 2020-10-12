@@ -23,4 +23,9 @@ public class VisitServiceImpl implements VisitService {
     public List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO) {
         return visitMapper.getVisitList(visitSearchDTO);
     }
+
+    @Override
+    public void deleteVisit(Long id) {
+        visitMapper.deleteVisit(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.yuanch.project.controller;
 
 import com.yuanch.common.web.controller.BaseController;
+import com.yuanch.common.web.domain.AjaxResult;
 import com.yuanch.common.web.domain.page.TableDataInfo;
 import com.yuanch.project.dto.SuspectSearchDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
@@ -11,10 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,7 +36,12 @@ public class VisitorController  extends BaseController {
         return getDataTable(visitVOS);
     }
 
-
+    @ApiOperation(value = "删除访客")
+    @GetMapping("deleteVisit")
+    public AjaxResult deleteVisit(@RequestParam Long id) {
+        visitService.deleteVisit(id);
+        return AjaxResult.success("删除成功");
+    }
 
 
 }
