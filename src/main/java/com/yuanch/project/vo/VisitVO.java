@@ -36,7 +36,7 @@ public class VisitVO{
     private Long deleteStatus;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private Long suspectId;

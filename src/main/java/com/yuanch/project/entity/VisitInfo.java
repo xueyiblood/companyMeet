@@ -1,17 +1,20 @@
 package com.yuanch.project.entity;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.yuanch.common.enums.RelationEnum;
 import com.yuanch.common.enums.SexEnum;
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 /**
  * 来访人员实体
  */
 @Data
+
 public class VisitInfo {
 
     private Long id;
@@ -32,6 +35,7 @@ public class VisitInfo {
     private String phone;
 
     @EnumValue
+
     private RelationEnum relation;
 
     private Integer deleteStatus;

@@ -15,10 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
-public class VisitServiceImpl  extends ServiceImpl<VisitMapper, VisitInfo> implements VisitService {
+public class VisitServiceImpl implements VisitService {
 
     @Autowired
     private VisitMapper visitMapper;
@@ -35,18 +36,17 @@ public class VisitServiceImpl  extends ServiceImpl<VisitMapper, VisitInfo> imple
 
     @Override
     public void addVisits(List<VisitDTO> visitDTOS) {
-        List<VisitInfo> visits = new ArrayList<>();
-        
+
         if (CollectionUtil.isNotEmpty(visitDTOS)){
             for (VisitDTO visitDTO : visitDTOS) {
-                VisitInfo visitInfo = new VisitInfo();
-                BeanUtil.copyProperties(visitDTO, visitInfo);
-                visitInfo.setDeleteStatus(0);
-                visits.add(visitInfo);
+                VisitInfo oldVisit = visitMapper.findByIdcardAndSuspectId(visitDTO.getIdCard(), visitDTO.getSuspectId());
+                if (Objects.isNull(oldVisit)){
+                    visitMapper.addVist(visitDTO);
+                } else  {
+                    visitMapper.updateVisit(visitDTO);
+                }
+
             }
         }
-
-        this.saveBatch(visits);
-
     }
 }

@@ -46,7 +46,7 @@ public class VisitorController  extends BaseController {
 
     @ApiOperation(value = "保存访客")
     @PostMapping("addVisits")
-    public AjaxResult addVisits(@RequestBody List<VisitDTO> visitDTOS) {
+    public AjaxResult addVisits(@RequestBody @Validated List<VisitDTO> visitDTOS) {
         visitService.addVisits(visitDTOS);
         return AjaxResult.success("添加成功");
     }

@@ -17,4 +17,54 @@
         UPDATE visit_info set delete_status = 1 where id =#{id}
     </update>
 
+
+    <insert id="addVist" parameterType="com.yuanch.project.dto.VisitDTO">
+        insert into visit_info(
+        <if test="name != null ">`name`,</if>
+        <if test="sex != null ">sex,</if>
+        <if test="nation != null ">nation,</if>
+        <if test="birthday != null ">birthday,</if>
+        <if test="address != null ">address,</if>
+        <if test="idCard != null ">id_card,</if>
+        <if test="phone != null ">phone,</if>
+        <if test="relation != null ">relation,</if>
+        <if test="suspectId != null ">suspect_id,</if>
+        delete_status
+        )values(
+        <if test="name != null ">#{name},</if>
+        <if test="sex != null ">#{sex},</if>
+        <if test="nation != null ">#{nation},</if>
+        <if test="birthday != null ">#{birthday},</if>
+        <if test="address != null ">#{address},</if>
+        <if test="idCard != null ">#{idCard},</if>
+        <if test="phone != null ">#{phone},</if>
+        <if test="relation != null ">#{relation},</if>
+        <if test="suspectId != null ">#{suspectId},</if>
+        0
+        )
+    </insert>
+
+
+    <select id="findByIdcardAndSuspectId" resultType="com.yuanch.project.entity.VisitInfo">
+        SELECT id as id,name as name ,sex as sex ,nation as nation ,birthday as birthday,
+        address as address , id_card as idCard,phone as phone ,relation as relation,
+        create_time as createTime, update_time as updateTime, delete_status as deleteStatus, suspect_id as suspectId
+        from visit_info vi where delete_status = 0
+            and vi.suspect_id = #{suspectId} and vi.id_card = #{idCard}
+    </select>
+
+    <update id="updateVisit"  parameterType="com.yuanch.project.dto.VisitDTO" >
+       update visit_info
+        <if test="name != null ">set `name` = #{name},</if>
+        <if test="sex != null "> sex = #{sex},</if>
+        <if test="nation != null "> nation = #{nation},</if>
+        <if test="birthday != null "> birthday = #{birthday},</if>
+        <if test="address != null "> address =#{address},</if>
+        <if test="phone != null "> phone= #{phone},</if>
+        <if test="relation != null "> relation=#{relation},</if>
+        <if test="idCard != null "> id_card= #{idCard}</if>
+
+        where suspect_id = #{suspectId} and id_card = #{idCard} and delete_status = 0
+    </update>
+
 </mapper>
