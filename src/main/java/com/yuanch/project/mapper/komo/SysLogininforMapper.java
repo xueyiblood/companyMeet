@@ -12,7 +12,6 @@ import java.util.List;
  * @author ruoyi
  */
 @Mapper
-@Component
 public interface SysLogininforMapper {
     /**
      * 新增系统登录日志

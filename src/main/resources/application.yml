@@ -98,6 +98,7 @@ swagger:
   pathMapping: /
 # mybatis-plus相关配置
 mybatis-plus:
+  type-enums-package: com.yuanch.common.enums
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
   mapper-locations: classpath*:mybatis/**/*Mapper.xml
   # 以下配置均有默认值,可以不设置
@@ -116,3 +117,4 @@ mybatis-plus:
     call-setters-on-nulls: true
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler

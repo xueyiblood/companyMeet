@@ -1,8 +1,16 @@
 package com.yuanch.common.enums;
 
-public enum SexEnum {
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+@JsonFormat
+public enum SexEnum {
+    /**
+     * 性别女
+     */
     F("F", "女"),
+    /**
+     * 性别男
+     */
     M("M", "男");
 
     private final String code;
