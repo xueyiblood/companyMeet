@@ -7,7 +7,7 @@ yuanch:
   # 版权年份
   copyrightYear: 2020
   # 文件路径 示例（ Windows配置D:/yuanch/uploadPath，Linux配置 /home/yuanch/uploadPath）
-  profile: e:/yuanch/uploadPath/pendingjudge/
+  profile: d:/yuanch/companymeet/
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
