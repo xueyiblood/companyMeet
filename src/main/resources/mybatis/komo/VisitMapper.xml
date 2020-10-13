@@ -9,7 +9,7 @@
         address as address , id_card as idCard,phone as phone ,relation as relation,
         create_time as createTime, update_time as updateTime, delete_status as deleteStatus, suspect_id as suspectId
         from visit_info vi where delete_status = 0
-            and vi.suspect_id = #{param.suspectId}
+            and vi.suspect_id = #{suspectId} order by update_time DESC
     </select>
 
 

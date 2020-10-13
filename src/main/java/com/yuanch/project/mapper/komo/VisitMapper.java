@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface VisitMapper extends BaseMapper<VisitInfo> {
 
-    List<VisitVO> getVisitList(@Param("param") VisitSearchDTO visitSearchDTO);
+    List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO);
 
     void deleteVisit(@Param("id") Long id);
 

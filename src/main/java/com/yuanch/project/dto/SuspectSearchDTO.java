@@ -7,5 +7,9 @@ public class SuspectSearchDTO {
 
     private String personCode;
 
+    private String name;
+
+    private String idCard;
+
 
 }
