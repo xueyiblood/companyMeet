@@ -40,7 +40,7 @@ public class DataSource2Config {
 	public SqlSessionFactory testSqlSessionFactory(@Qualifier("mfwDataSource") DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean bean=new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
-		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource1Config.MAPPER_LOCATION));
+		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource2Config.MAPPER_LOCATION));
 		return bean.getObject();
 	}
 	@Bean(name="mfwTransactionManager")//配置事务

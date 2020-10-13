@@ -46,7 +46,7 @@ komo:
     driver-class-name: com.mysql.jdbc.Driver
 mfw:
   datasource:
-    username: root
-    password: 123456
-    url: dbc:oracle:thin:@127.0.0.1:1521:ORCL
+    username: JGXXPT
+    password: JGXXPT
+    jdbc-url: jdbc:oracle:thin:@127.0.0.1:1521:ORCL
     driver-class-name: oracle.jdbc.driver.OracleDriver

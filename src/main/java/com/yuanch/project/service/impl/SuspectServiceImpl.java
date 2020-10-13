@@ -19,7 +19,6 @@ public class SuspectServiceImpl extends ServiceImpl<SuspectMapper, SuspectInfo> 
     @Autowired
     private SuspectMapper suspectMapper;
 
-
     @Override
     public List<SuspectVO> getSuspectList(SuspectSearchDTO suspectSearchDTO) {
         return suspectMapper.getSuspectList(suspectSearchDTO);

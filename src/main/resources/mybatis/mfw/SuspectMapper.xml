@@ -6,17 +6,16 @@
 
     <select id="getSuspectList" parameterType="com.yuanch.project.dto.SuspectSearchDTO" resultType="com.yuanch.project.vo.SuspectVO">
         select RYBH as personCode, XM as name, ZJHM as idCard
-        from RYJBXXB_KSS RY WHERE RU.RYBJ = 0
+        from RYJBXXB_KSS RY WHERE RY.RYBJ = 0
         <if test="personCode != null and personCode != ''">
-            AND RY.RYBH like concat('%', #{personCode}, '%')
+            AND RY.RYBH like '%${personCode}%'
         </if>
         <if test="name != null and name != ''">
-            AND RY.XM like concat('%', #{name}, '%')
+            AND RY.XM like '%#{name, jdbcType=VARCHAR}%'
         </if>
         <if test="idCard != null and idCard != ''">
-            AND RY.ZJBH like concat('%', #{idCard}, '%')
+            AND RY.ZJBH like '%#{idCard, jdbcType=VARCHAR}%'
         </if>
-
     </select>
 
 
