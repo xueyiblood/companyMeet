@@ -8,6 +8,7 @@ import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.service.VisitService;
 import com.yuanch.project.vo.SuspectVO;
+import com.yuanch.project.vo.VisitDropdown;
 import com.yuanch.project.vo.VisitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -51,6 +52,11 @@ public class VisitorController  extends BaseController {
         return AjaxResult.success("添加成功");
     }
 
-
+    @ApiOperation(value = "保存访客")
+    @GetMapping("getVisitDropdown")
+    public AjaxResult getVisitDropdown() {
+        VisitDropdown drop =  visitService.getVisitDropdown();
+        return AjaxResult.success(drop);
+    }
 
 }

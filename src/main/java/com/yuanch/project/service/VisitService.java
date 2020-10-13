@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.entity.VisitInfo;
+import com.yuanch.project.vo.VisitDropdown;
 import com.yuanch.project.vo.VisitVO;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface VisitService  {
     void deleteVisit(Long id);
 
     void addVisits(List<VisitDTO> visitDTOS);
+
+    VisitDropdown getVisitDropdown();
 }

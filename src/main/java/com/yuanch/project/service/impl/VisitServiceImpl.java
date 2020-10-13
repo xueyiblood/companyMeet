@@ -1,19 +1,19 @@
 package com.yuanch.project.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yuanch.common.enums.RelationEnum;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.entity.VisitInfo;
 import com.yuanch.project.mapper.komo.VisitMapper;
 import com.yuanch.project.service.VisitService;
+import com.yuanch.project.vo.VisitDropdown;
 import com.yuanch.project.vo.VisitVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,5 +48,13 @@ public class VisitServiceImpl implements VisitService {
 
             }
         }
+    }
+
+    @Override
+    public VisitDropdown getVisitDropdown() {
+        VisitDropdown visitDropdown = new VisitDropdown();
+        visitDropdown.setRelationEnums(Arrays.asList(RelationEnum.values()));
+
+        return visitDropdown;
     }
 }
