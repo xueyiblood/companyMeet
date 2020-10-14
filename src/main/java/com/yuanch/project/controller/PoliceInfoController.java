@@ -65,7 +65,7 @@ public class PoliceInfoController extends BaseController {
 
     @Log(title = "警员管理", businessType = BusinessType.DELETE)
     @ApiOperation(value = "获取单位下拉框")
-    @DeleteMapping("getUnitDropdown")
+    @GetMapping("getUnitDropdown")
     public AjaxResult getUnitDropdown()
     {
         PoliceDropDown policeDropDown = policeInfoService.getUnitDropdown();

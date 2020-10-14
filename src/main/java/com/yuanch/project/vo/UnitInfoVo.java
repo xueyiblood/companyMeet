@@ -24,7 +24,7 @@ public class UnitInfoVo {
 
     private String fullName;
 
-    private Integer deleteStatus;
+//    private Integer deleteStatus;
 
     private List<UnitInfoVo> children = new ArrayList<>();
 }
