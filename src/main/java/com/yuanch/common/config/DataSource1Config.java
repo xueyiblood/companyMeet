@@ -1,6 +1,7 @@
 package com.yuanch.common.config;
 
 
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,7 +37,7 @@ public class DataSource1Config {
 	@Bean(name="komoSqlSessionFactory")
 	@Primary
 	public SqlSessionFactory testSqlSessionFactory(@Qualifier("komoDataSource") DataSource dataSource) throws Exception {
-		SqlSessionFactoryBean bean=new SqlSessionFactoryBean();
+		MybatisSqlSessionFactoryBean bean=new MybatisSqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource1Config.MAPPER_LOCATION));
 		return bean.getObject();

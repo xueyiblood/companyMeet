@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class VisitSearchDTO {
+public class VisitSearchDTO extends SearchDTO{
 
     @NotNull
     private Long suspectId;
