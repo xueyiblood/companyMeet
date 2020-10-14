@@ -3,12 +3,10 @@ package com.yuanch.project.controller;
 import com.yuanch.common.web.controller.BaseController;
 import com.yuanch.common.web.domain.AjaxResult;
 import com.yuanch.common.web.domain.page.TableDataInfo;
-import com.yuanch.project.dto.SuspectSearchDTO;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.service.VisitService;
-import com.yuanch.project.vo.SuspectVO;
-import com.yuanch.project.vo.VisitDropdown;
+import com.yuanch.project.vo.VisitDropDown;
 import com.yuanch.project.vo.VisitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,7 +53,7 @@ public class VisitorController  extends BaseController {
     @ApiOperation(value = "保存访客")
     @GetMapping("getVisitDropdown")
     public AjaxResult getVisitDropdown() {
-        VisitDropdown drop =  visitService.getVisitDropdown();
+        VisitDropDown drop =  visitService.getVisitDropdown();
         return AjaxResult.success(drop);
     }
 

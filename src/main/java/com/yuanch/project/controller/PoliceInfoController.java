@@ -8,6 +8,7 @@ import com.yuanch.common.web.domain.page.TableDataInfo;
 import com.yuanch.project.dto.PoliceDTO;
 import com.yuanch.project.dto.PoliceSearchDTO;
 import com.yuanch.project.service.PoliceInfoService;
+import com.yuanch.project.vo.PoliceDropDown;
 import com.yuanch.project.vo.PoliceInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,4 +62,15 @@ public class PoliceInfoController extends BaseController {
         policeInfoService.deletePoliceInfo(ids);
         return AjaxResult.success("删除成功");
     }
+
+    @Log(title = "警员管理", businessType = BusinessType.DELETE)
+    @ApiOperation(value = "获取单位下拉框")
+    @DeleteMapping("getUnitDropdown")
+    public AjaxResult getUnitDropdown()
+    {
+        PoliceDropDown policeDropDown = policeInfoService.getUnitDropdown();
+        return AjaxResult.success(policeDropDown);
+    }
+
+
 }

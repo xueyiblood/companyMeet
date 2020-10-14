@@ -7,7 +7,7 @@ import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.entity.VisitInfo;
 import com.yuanch.project.mapper.komo.VisitMapper;
 import com.yuanch.project.service.VisitService;
-import com.yuanch.project.vo.VisitDropdown;
+import com.yuanch.project.vo.VisitDropDown;
 import com.yuanch.project.vo.VisitVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,8 +51,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public VisitDropdown getVisitDropdown() {
-        VisitDropdown visitDropdown = new VisitDropdown();
+    public VisitDropDown getVisitDropdown() {
+        VisitDropDown visitDropdown = new VisitDropDown();
         visitDropdown.setRelationEnums(Arrays.asList(RelationEnum.values()));
 
         return visitDropdown;

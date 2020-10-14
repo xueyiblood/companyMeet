@@ -6,7 +6,7 @@
 
     <select id="selectPoliceList" resultType="com.yuanch.project.vo.PoliceInfoVO">
         select p.id, p.name, p.police_code, p.phone, p.dept_code, u.unitname as deptName
-        from police_info p left join unit_info u on p.dept_code = u.id and u.delete_status=0
+        from police_info p left join unit_info u on p.dept_code = u.unitno and u.delete_status=0
         where p.delete_status=0
 
             <if test="param.name != null ">

@@ -10,8 +10,11 @@ import com.yuanch.project.dto.PoliceDTO;
 import com.yuanch.project.dto.PoliceSearchDTO;
 import com.yuanch.project.entity.PoliceInfo;
 import com.yuanch.project.mapper.komo.PoliceInfoMapper;
+import com.yuanch.project.mapper.komo.UnitInfoMapper;
 import com.yuanch.project.service.PoliceInfoService;
+import com.yuanch.project.vo.PoliceDropDown;
 import com.yuanch.project.vo.PoliceInfoVO;
+import com.yuanch.project.vo.UnitInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,8 @@ public class PoliceInfoServiceImpl extends ServiceImpl<PoliceInfoMapper, PoliceI
 
     @Autowired
     private PoliceInfoMapper policeInfoMapper;
+    @Autowired
+    private UnitInfoMapper unitInfoMapper;
 
     @Override
     public List<PoliceInfoVO> getPoliceList(PoliceSearchDTO policeSearchDTO) {
@@ -61,5 +66,13 @@ public class PoliceInfoServiceImpl extends ServiceImpl<PoliceInfoMapper, PoliceI
             });
             this.saveOrUpdateBatch(policeInfos);
         }
+    }
+
+    @Override
+    public PoliceDropDown getUnitDropdown() {
+        PoliceDropDown policeDropDown = new PoliceDropDown();
+        List<UnitInfoVo> unitList = unitInfoMapper.getUnitList("", "");
+        policeDropDown.setUnitInfos(unitList);
+        return policeDropDown;
     }
 }
