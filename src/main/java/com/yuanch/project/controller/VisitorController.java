@@ -3,9 +3,11 @@ package com.yuanch.project.controller;
 import com.yuanch.common.web.controller.BaseController;
 import com.yuanch.common.web.domain.AjaxResult;
 import com.yuanch.common.web.domain.page.TableDataInfo;
+import com.yuanch.project.dto.FaceCheckDTO;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.service.VisitService;
+import com.yuanch.project.vo.FaceVO;
 import com.yuanch.project.vo.VisitDropDown;
 import com.yuanch.project.vo.VisitVO;
 import io.swagger.annotations.Api;
@@ -56,5 +58,14 @@ public class VisitorController  extends BaseController {
         VisitDropDown drop =  visitService.getVisitDropdown();
         return AjaxResult.success(drop);
     }
+
+    @ApiOperation(value = "人脸比对")
+    @GetMapping("faceCheck")
+    public AjaxResult faceCheck(@RequestBody FaceVO faceVO) {
+        FaceCheckDTO faceCheck =  visitService.faceCheck(faceVO);
+        return AjaxResult.success(faceCheck);
+    }
+
+
 
 }
