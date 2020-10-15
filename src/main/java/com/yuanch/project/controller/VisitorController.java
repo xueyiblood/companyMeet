@@ -50,7 +50,7 @@ public class VisitorController  extends BaseController {
         return AjaxResult.success("添加成功");
     }
 
-    @ApiOperation(value = "保存访客")
+    @ApiOperation(value = "获取下拉框")
     @GetMapping("getVisitDropdown")
     public AjaxResult getVisitDropdown() {
         VisitDropDown drop =  visitService.getVisitDropdown();
