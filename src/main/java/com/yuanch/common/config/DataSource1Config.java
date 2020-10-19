@@ -2,6 +2,8 @@ package com.yuanch.common.config;
 
 
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +19,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * 本地数据库配置
@@ -40,6 +43,17 @@ public class DataSource1Config {
 		MybatisSqlSessionFactoryBean bean=new MybatisSqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource1Config.MAPPER_LOCATION));
+		Interceptor interceptor = new PageInterceptor();
+		Properties properties = new Properties();
+		properties.setProperty("helperDialect", "mysql");
+		properties.setProperty("offsetAsPageNum", "true");
+		properties.setProperty("rowBoundsWithCount", "true");
+		properties.setProperty("reasonable", "true");
+		properties.setProperty("supportMethodsArguments","true");
+		properties.setProperty("params","pageNum=pageNumKey;pageSize=pageSizeKey;");
+		interceptor.setProperties(properties);
+		bean.setPlugins(new Interceptor[] {interceptor});
+
 		return bean.getObject();
 	}
 	@Bean(name="komoTransactionManager")//配置事务

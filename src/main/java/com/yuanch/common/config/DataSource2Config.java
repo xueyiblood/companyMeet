@@ -1,6 +1,8 @@
 package com.yuanch.common.config;
 
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,6 +16,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /*
  * @Primary:意思是在众多相同的bean中，优先使用用@Primary注解的bean
@@ -42,6 +45,18 @@ public class DataSource2Config {
 		MybatisSqlSessionFactoryBean bean=new MybatisSqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource2Config.MAPPER_LOCATION));
+
+		Interceptor interceptor = new PageInterceptor();
+		Properties properties = new Properties();
+		properties.setProperty("helperDialect", "oracle");
+		properties.setProperty("offsetAsPageNum", "true");
+		properties.setProperty("rowBoundsWithCount", "true");
+		properties.setProperty("reasonable", "true");
+		properties.setProperty("supportMethodsArguments","true");
+		properties.setProperty("params","pageNum=pageNumKey;pageSize=pageSizeKey;");
+		interceptor.setProperties(properties);
+		bean.setPlugins(new Interceptor[] {interceptor});
+
 		return bean.getObject();
 	}
 	@Bean(name="mfwTransactionManager")//配置事务
