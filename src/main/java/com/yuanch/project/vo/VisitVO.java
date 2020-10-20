@@ -39,6 +39,6 @@ public class VisitVO{
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    private Long suspectId;
+    private String suspectId;
 
 }

@@ -44,6 +44,6 @@ public class VisitInfo {
 
     private Date updateTime;
 
-    private Long suspectId;
+    private String suspectId;
 
 }
