@@ -10,8 +10,8 @@ public class SuspectVO {
 
     private String idCard;
 
-//    private String roomCode;
-//
-//    private String archiveCode;
+    private String roomCode;
+
+    private String archiveCode;
 
 }
