@@ -43,16 +43,14 @@ public class DataSource1Config {
 		MybatisSqlSessionFactoryBean bean=new MybatisSqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource1Config.MAPPER_LOCATION));
-		Interceptor interceptor = new PageInterceptor();
-		Properties properties = new Properties();
-		properties.setProperty("helperDialect", "mysql");
-		properties.setProperty("offsetAsPageNum", "true");
-		properties.setProperty("rowBoundsWithCount", "true");
-		properties.setProperty("reasonable", "true");
-		properties.setProperty("supportMethodsArguments","true");
-		properties.setProperty("params","pageNum=pageNumKey;pageSize=pageSizeKey;");
-		interceptor.setProperties(properties);
-		bean.setPlugins(new Interceptor[] {interceptor});
+//		Interceptor interceptor = new PageInterceptor();
+//		Properties properties = new Properties();
+//		properties.setProperty("auto-dialect", "true");
+//		properties.setProperty("reasonable", "false");
+//		properties.setProperty("supportMethodsArguments","true");
+//		properties.setProperty("auto-runtime-dialect","true");
+//		interceptor.setProperties(properties);
+//		bean.setPlugins(new Interceptor[] {interceptor});
 
 		return bean.getObject();
 	}

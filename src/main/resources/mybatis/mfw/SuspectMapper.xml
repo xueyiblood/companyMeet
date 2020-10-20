@@ -14,7 +14,7 @@
             AND RY.XM like '%${name}%'
         </if>
         <if test="idCard != null and idCard != ''">
-            AND RY.ZJBH like '%${idCard}%'
+            AND RY.ZJHM like '%${idCard}%'
         </if>
     </select>
 
