@@ -31,6 +31,6 @@ public class VisitDTO {
     @NotNull
     private Long suspectId;
 
-
+    private String picture;
 
 }

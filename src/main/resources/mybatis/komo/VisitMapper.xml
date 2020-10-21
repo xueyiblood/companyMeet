@@ -7,7 +7,7 @@
     <select id="getVisitList" resultType="com.yuanch.project.vo.VisitVO">
         SELECT id as id,name as name ,sex as sex ,nation as nation ,birthday as birthday,
         address as address , id_card as idCard,phone as phone ,relation as relation,
-        create_time as createTime, update_time as updateTime, delete_status as deleteStatus, suspect_id as suspectId
+        create_time as createTime, update_time as updateTime, delete_status as deleteStatus, suspect_id as suspectId, picture as picture
         from visit_info vi where delete_status = 0
             and vi.suspect_id = #{suspectId} order by update_time DESC
     </select>
@@ -29,6 +29,7 @@
         <if test="phone != null ">phone,</if>
         <if test="relation != null ">relation,</if>
         <if test="suspectId != null ">suspect_id,</if>
+        <if test="picture != null ">picture,</if>
         delete_status
         )values(
         <if test="name != null ">#{name},</if>
@@ -40,6 +41,7 @@
         <if test="phone != null ">#{phone},</if>
         <if test="relation != null ">#{relation},</if>
         <if test="suspectId != null ">#{suspectId},</if>
+        <if test="picture != null ">#{picture},</if>
         0
         )
     </insert>
@@ -48,7 +50,7 @@
     <select id="findByIdcardAndSuspectId" resultType="com.yuanch.project.entity.VisitInfo">
         SELECT id as id,name as name ,sex as sex ,nation as nation ,birthday as birthday,
         address as address , id_card as idCard,phone as phone ,relation as relation,
-        create_time as createTime, update_time as updateTime, delete_status as deleteStatus, suspect_id as suspectId
+        create_time as createTime, update_time as updateTime, delete_status as deleteStatus, suspect_id as suspectId, picture as picture
         from visit_info vi where delete_status = 0
             and vi.suspect_id = #{suspectId} and vi.id_card = #{idCard}
     </select>
@@ -62,6 +64,7 @@
         <if test="address != null "> address =#{address},</if>
         <if test="phone != null "> phone= #{phone},</if>
         <if test="relation != null "> relation=#{relation},</if>
+        <if test="picture != null "> picture= #{picture}</if>
         <if test="idCard != null "> id_card= #{idCard}</if>
 
         where suspect_id = #{suspectId} and id_card = #{idCard} and delete_status = 0

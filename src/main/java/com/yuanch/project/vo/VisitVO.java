@@ -41,4 +41,6 @@ public class VisitVO{
 
     private String suspectId;
 
+    private String picture;
+
 }
