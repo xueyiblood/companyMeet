@@ -53,12 +53,12 @@ public class VisitServiceImpl implements VisitService {
 
         if (CollectionUtil.isNotEmpty(visitDTOS)){
             for (VisitDTO visitDTO : visitDTOS) {
-                VisitInfo oldVisit = visitMapper.findByIdcardAndSuspectId(visitDTO.getIdCard(), visitDTO.getSuspectId());
-                if (Objects.isNull(oldVisit)){
+//                VisitInfo oldVisit = visitMapper.findByIdcardAndSuspectId(visitDTO.getIdCard(), visitDTO.getSuspectId());
+//                if (Objects.isNull(oldVisit)){
                     visitMapper.addVist(visitDTO);
-                } else  {
-                    visitMapper.updateVisit(visitDTO);
-                }
+//                } else  {
+//                    visitMapper.updateVisit(visitDTO);
+//                }
 
             }
         }
