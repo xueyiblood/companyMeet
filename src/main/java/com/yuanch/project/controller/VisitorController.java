@@ -60,7 +60,7 @@ public class VisitorController  extends BaseController {
     }
 
     @ApiOperation(value = "人脸比对")
-    @GetMapping("faceCheck")
+    @PostMapping("faceCheck")
     public AjaxResult faceCheck(@RequestBody FaceVO faceVO) {
         FaceCheckDTO faceCheck =  visitService.faceCheck(faceVO);
         return AjaxResult.success(faceCheck);
