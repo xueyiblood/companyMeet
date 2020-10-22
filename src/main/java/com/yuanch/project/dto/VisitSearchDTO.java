@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class VisitSearchDTO extends SearchDTO{
 
     @NotNull
-    private Long suspectId;
+    private String suspectId;
 
 
 

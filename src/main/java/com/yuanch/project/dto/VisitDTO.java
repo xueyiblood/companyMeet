@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class VisitDTO {
@@ -29,8 +30,10 @@ public class VisitDTO {
     @EnumValue
     private RelationEnum relation;
     @NotNull
-    private Long suspectId;
+    private String suspectId;
 
     private String picture;
+
+    private List<ProductDTO> products;
 
 }

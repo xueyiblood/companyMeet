@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @Description:
+ * @Description: 单位
  * @Author: mary
  * @Date: 2020/8/5 0005 17:51
  */

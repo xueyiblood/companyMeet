@@ -1,14 +1,18 @@
 package com.yuanch.project.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuanch.common.config.properties.PictureProperties;
 import com.yuanch.common.enums.RelationEnum;
 import com.yuanch.project.dto.FaceCheckDTO;
+import com.yuanch.project.dto.ProductDTO;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
+import com.yuanch.project.entity.ProductInfo;
 import com.yuanch.project.entity.VisitInfo;
 import com.yuanch.project.mapper.komo.VisitMapper;
+import com.yuanch.project.service.ProductInfoService;
 import com.yuanch.project.service.VisitService;
 import com.yuanch.project.vo.FaceVO;
 import com.yuanch.project.vo.VisitDropDown;
@@ -37,6 +41,8 @@ public class VisitServiceImpl implements VisitService {
     private VisitMapper visitMapper;
     @Autowired
     private PictureProperties pictureProperties;
+    @Autowired
+    private ProductInfoService productInfoService;
 
     @Override
     public List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO) {
@@ -53,12 +59,25 @@ public class VisitServiceImpl implements VisitService {
 
         if (CollectionUtil.isNotEmpty(visitDTOS)){
             for (VisitDTO visitDTO : visitDTOS) {
-//                VisitInfo oldVisit = visitMapper.findByIdcardAndSuspectId(visitDTO.getIdCard(), visitDTO.getSuspectId());
-//                if (Objects.isNull(oldVisit)){
-                    visitMapper.addVist(visitDTO);
-//                } else  {
-//                    visitMapper.updateVisit(visitDTO);
-//                }
+                VisitInfo visitInfo = new VisitInfo();
+                BeanUtil.copyProperties(visitDTO, visitInfo);
+                visitInfo.setDeleteStatus(0);
+                visitMapper.insert(visitInfo);
+
+                 if (CollectionUtil.isNotEmpty(visitDTO.getProducts())){
+                     List<ProductInfo> productInfos = new ArrayList<>();
+                     for (ProductDTO productDTO : visitDTO.getProducts()) {
+                         ProductInfo productInfo = new ProductInfo();
+                         BeanUtil.copyProperties(productDTO, productInfo);
+                         productInfo.setDeleteStatus(0);
+                         productInfo.setSuspectId(visitDTO.getSuspectId());
+                         productInfo.setVisitId(visitInfo.getId());
+                         productInfos.add(productInfo);
+                     }
+
+                     productInfoService.saveOrUpdateBatch(productInfos);
+
+                 }
 
             }
         }

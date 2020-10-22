@@ -34,7 +34,7 @@
 #      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
 picture:
-  checkurl: 127.0.0.1
+  checkurl: http://127.0.0.1
 
 server:
   port: 7080
