@@ -5,10 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuanch.common.config.properties.PictureProperties;
 import com.yuanch.common.enums.RelationEnum;
-import com.yuanch.project.dto.FaceCheckDTO;
-import com.yuanch.project.dto.ProductDTO;
-import com.yuanch.project.dto.VisitDTO;
-import com.yuanch.project.dto.VisitSearchDTO;
+import com.yuanch.project.dto.*;
 import com.yuanch.project.entity.ProductInfo;
 import com.yuanch.project.entity.VisitInfo;
 import com.yuanch.project.mapper.komo.VisitMapper;
@@ -46,7 +43,17 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO) {
-        return visitMapper.getVisitList(visitSearchDTO);
+        List<VisitVO> visitList = visitMapper.getVisitList(visitSearchDTO);
+        if (CollectionUtil.isNotEmpty(visitList)){
+            for (VisitVO visitVO : visitList) {
+                ProductSearchDTO productSearchDTO = new ProductSearchDTO();
+                productSearchDTO.setVisitId(visitVO.getId());
+                List<ProductInfo> visitProductList = productInfoService.getVisitProductList(productSearchDTO);
+                visitVO.setProducts(visitProductList);
+
+            }
+        }
+        return visitList;
     }
 
     @Override
