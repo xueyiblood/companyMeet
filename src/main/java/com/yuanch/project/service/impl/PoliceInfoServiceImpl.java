@@ -34,7 +34,7 @@ public class PoliceInfoServiceImpl extends ServiceImpl<PoliceInfoMapper, PoliceI
     @Override
     public List<PoliceInfoVO> getPoliceList(PoliceSearchDTO policeSearchDTO) {
 
-        List<PoliceInfoVO> policeInfo = policeInfoMapper.selectPoliceList(policeSearchDTO);
+        List<PoliceInfoVO> policeInfo = policeInfoMapper.getPoliceList(policeSearchDTO);
         return policeInfo;
     }
 

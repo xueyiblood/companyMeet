@@ -11,5 +11,5 @@ import java.util.List;
 
 @Mapper
 public interface PoliceInfoMapper extends BaseMapper<PoliceInfo> {
-    List<PoliceInfoVO> selectPoliceList(@Param("param") PoliceSearchDTO policeSearchDTO);
+    List<PoliceInfoVO> getPoliceList(@Param("param") PoliceSearchDTO policeSearchDTO);
 }
