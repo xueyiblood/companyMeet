@@ -30,7 +30,8 @@ public class ProductInfo {
     private String suspectId;
     @TableField("visit_id")
     private Long visitId;
-
+    @TableField("picture")
+    private String picture;
 
 
 }

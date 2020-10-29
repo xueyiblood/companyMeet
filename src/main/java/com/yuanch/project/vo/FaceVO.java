@@ -7,11 +7,11 @@ public class FaceVO {
     /**
      * 身份证照片base64
      */
-    private String cardPicture;
+    private String targetImage;
     /**
      * 人脸照片base64
      */
-    private String facePicture;
+    private String queryImage;
 
 
 }

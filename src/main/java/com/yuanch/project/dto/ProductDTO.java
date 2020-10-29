@@ -9,5 +9,5 @@ public class ProductDTO {
 
     private Long productNum;
 
-
+    private String picture;
 }

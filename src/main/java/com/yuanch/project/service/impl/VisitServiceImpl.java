@@ -107,10 +107,10 @@ public class VisitServiceImpl implements VisitService {
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, Object> data = new HashMap<String, Object>();
-                data.put("code", faceVO.getCardPicture());
-                data.put("name", faceVO.getFacePicture());
+                data.put("queryImage", faceVO.getQueryImage());
+                data.put("targetImage", faceVO.getTargetImage());
 
-                HttpPost httpPost = new HttpPost(pictureProperties.getCheckurl() + "/test2");
+                HttpPost httpPost = new HttpPost(pictureProperties.getCheckurl());
                 httpPost.setHeader(HTTP.CONTENT_TYPE, "application/json");
                 httpPost.setEntity(new StringEntity(objectMapper.writeValueAsString(data),
                         ContentType.create("text/json", "UTF-8")));
@@ -131,7 +131,6 @@ public class VisitServiceImpl implements VisitService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return faceCheckDTO;
     }
 }

@@ -34,7 +34,7 @@
 #      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
 picture:
-  checkurl: http://127.0.0.1
+  checkurl:  http://4a70a4644a3e.ngrok.io/Face/hello
 
 server:
   port: 7080
