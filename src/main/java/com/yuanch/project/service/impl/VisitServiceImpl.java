@@ -120,6 +120,7 @@ public class VisitServiceImpl implements VisitService {
                 HttpEntity entity = response.getEntity();
                 String result = EntityUtils.toString(entity);
                 System.out.println(result);
+                faceCheckDTO.setSimilarity(result);
             } finally {
                 if (response != null) {
                     response.close();
@@ -131,6 +132,7 @@ public class VisitServiceImpl implements VisitService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return faceCheckDTO;
     }
 }

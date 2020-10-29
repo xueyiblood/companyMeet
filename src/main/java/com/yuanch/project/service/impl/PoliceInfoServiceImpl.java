@@ -52,7 +52,7 @@ public class PoliceInfoServiceImpl extends ServiceImpl<PoliceInfoMapper, PoliceI
         PoliceInfo oldPoliceInfo = policeInfoMapper.selectById(policeDTO.getId());
         if (Objects.nonNull(oldPoliceInfo)){
             BeanUtil.copyProperties(policeDTO, oldPoliceInfo, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
-            oldPoliceInfo.setPassword(SecureUtil.md5(policeDTO.getPassword()));
+
             policeInfoMapper.updateById(oldPoliceInfo);
         }
     }
