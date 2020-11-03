@@ -1,6 +1,7 @@
 package com.yuanch.project.service;
 
 import com.yuanch.project.dto.FaceCheckDTO;
+import com.yuanch.project.dto.FaceCheckRunningDTO;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.vo.FaceVO;
@@ -19,4 +20,6 @@ public interface VisitService  {
     VisitDropDown getVisitDropdown();
 
     FaceCheckDTO faceCheck(FaceVO faceVO);
+
+    FaceCheckRunningDTO faceCheckWithRunning(FaceVO faceVO);
 }

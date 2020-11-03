@@ -4,6 +4,7 @@ import com.yuanch.common.web.controller.BaseController;
 import com.yuanch.common.web.domain.AjaxResult;
 import com.yuanch.common.web.domain.page.TableDataInfo;
 import com.yuanch.project.dto.FaceCheckDTO;
+import com.yuanch.project.dto.FaceCheckRunningDTO;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.service.VisitService;
@@ -66,6 +67,11 @@ public class VisitorController  extends BaseController {
         return AjaxResult.success(faceCheck);
     }
 
-
+    @ApiOperation(value = "在逃人脸比对")
+    @PostMapping("faceCheckWithRunning")
+    public AjaxResult faceCheckWithRunning(@RequestBody FaceVO faceVO) {
+        FaceCheckRunningDTO faceCheckRunningDTO =  visitService.faceCheckWithRunning(faceVO);
+        return AjaxResult.success(faceCheckRunningDTO);
+    }
 
 }

@@ -8,6 +8,7 @@ import com.yuanch.common.enums.RelationEnum;
 import com.yuanch.project.dto.*;
 import com.yuanch.project.entity.ProductInfo;
 import com.yuanch.project.entity.VisitInfo;
+import com.yuanch.project.mapper.komo.ProductInfoMapper;
 import com.yuanch.project.mapper.komo.VisitMapper;
 import com.yuanch.project.service.ProductInfoService;
 import com.yuanch.project.service.VisitService;
@@ -40,6 +41,8 @@ public class VisitServiceImpl implements VisitService {
     private PictureProperties pictureProperties;
     @Autowired
     private ProductInfoService productInfoService;
+    @Autowired
+    private ProductInfoMapper productInfoMapper;
 
     @Override
     public List<VisitVO> getVisitList(VisitSearchDTO visitSearchDTO) {
@@ -59,6 +62,16 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public void deleteVisit(Long id) {
         visitMapper.deleteVisit(id);
+        ProductSearchDTO productSearchDTO = new ProductSearchDTO();
+        productSearchDTO.setVisitId(id);
+        List<ProductInfo> visitProductList = productInfoService.getVisitProductList(productSearchDTO);
+        if (CollectionUtil.isNotEmpty(visitProductList)){
+            for (ProductInfo productInfo : visitProductList) {
+                productInfo.setDeleteStatus(1);
+            }
+            productInfoService.saveOrUpdateBatch(visitProductList);
+        }
+
     }
 
     @Override
@@ -134,5 +147,13 @@ public class VisitServiceImpl implements VisitService {
         }
 
         return faceCheckDTO;
+    }
+
+    @Override
+    public FaceCheckRunningDTO faceCheckWithRunning(FaceVO faceVO) {
+
+
+
+        return null;
     }
 }

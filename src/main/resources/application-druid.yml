@@ -34,7 +34,7 @@
 #      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
 picture:
-  checkurl:  http://192.168.3.30:82/Face/hello
+  checkurl:  http://192.168.4.216:82/Face/VerifyFaceByBase64
 
 server:
   port: 7080
