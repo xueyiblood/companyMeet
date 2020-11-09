@@ -12,8 +12,15 @@ public class PictureProperties {
     @Value("${picture.checkurl}")
     private String checkurl;
 
+    @Value("${picture.serviceurl}")
+    private String serviceurl;
 
+    @Value("${picture.name}")
+    private String name;
 
+    @Value("${picture.password}")
+    private String password;
 
-
+    @Value("${picture.prictureurl}")
+    private String prictureurl;
 }
