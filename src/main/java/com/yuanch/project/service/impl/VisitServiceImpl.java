@@ -267,12 +267,8 @@ public class VisitServiceImpl implements VisitService {
         CloseableHttpResponse response = null;
         String result = null;
         try {
-            URIBuilder uri = new URIBuilder(pictureProperties.getPrictureurl());
-            //get请求带参数
-            List<NameValuePair> list = new LinkedList<>();
-            BasicNameValuePair param1 = new BasicNameValuePair("uri_base64=", Base64.getEncoder().encodeToString(face_image_uri.getBytes()));
-            list.add(param1);
-            uri.setParameters(list);
+            URIBuilder uri = new URIBuilder(pictureProperties.getServiceurl() + "/storage/image?uri_base64=" + Base64.getEncoder().encodeToString(face_image_uri.getBytes()));
+
             HttpGet httpGet = new HttpGet(uri.build());
             //设置请求状态参数
             RequestConfig requestConfig = RequestConfig.custom()

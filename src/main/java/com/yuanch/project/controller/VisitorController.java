@@ -74,4 +74,11 @@ public class VisitorController  extends BaseController {
         return AjaxResult.success(faceCheckRunningDTO);
     }
 
+    @ApiOperation(value = "取人脸图片")
+    @PostMapping("faceCheckWithRunning")
+    public AjaxResult getPicture(@RequestBody FaceVO faceVO) {
+        FaceCheckRunningDTO faceCheckRunningDTO =  visitService.faceCheckWithRunning(faceVO);
+        return AjaxResult.success(faceCheckRunningDTO);
+    }
+
 }
