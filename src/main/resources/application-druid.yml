@@ -38,7 +38,7 @@ picture:
   serviceurl: http://50.88.5.2:11180/business/api
   name : ntjg
   password : 505d799f121eb6522ce11946a14d8e7c
-  prictureurl : http://172.30.101.179:11180/business/api/storage/image?
+  prictureurl : http://172.30.101.179:11180/business/api
 
 
 server:
