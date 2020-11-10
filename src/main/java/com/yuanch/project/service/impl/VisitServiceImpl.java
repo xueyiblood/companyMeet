@@ -158,8 +158,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public FaceCheckRunningDTO faceCheckWithRunning(FaceVO faceVO) {
-        FaceCheckRunningDTO faceCheckRunningDTO = new FaceCheckRunningDTO();
+    public FindFaceVO faceCheckWithRunning(FaceVO faceVO) {
+        FindFaceVO getfaces = new FindFaceVO();
 
         try {
             CloseableHttpClient client = null;
@@ -186,8 +186,8 @@ public class VisitServiceImpl implements VisitService {
 
                 //人脸比对取结果
 
-                this.getfaces (loginVO.getSession_id(), faceVO.getQueryImage());
-
+                getfaces = this.getfaces(loginVO.getSession_id(), faceVO.getQueryImage());
+                getfaces.setSessionId(loginVO.getSession_id());
 
             } finally {
                 if (response != null) {
@@ -201,7 +201,51 @@ public class VisitServiceImpl implements VisitService {
             e.printStackTrace();
         }
 
-        return faceCheckRunningDTO;
+        return getfaces;
+    }
+
+    @Override
+    public HttpEntity getPicture(String url, String sessionId) {
+        //创建 CloseableHttpClient
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+        HttpEntity httpEntity = null;
+        try {
+            URIBuilder uri = new URIBuilder(pictureProperties.getServiceurl() + "/storage/image?uri_base64=" + Base64.getEncoder().encodeToString(url.getBytes()));
+
+            HttpGet httpGet = new HttpGet(uri.build());
+            //设置请求状态参数
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectionRequestTimeout(3000)
+                    .setSocketTimeout(3000)
+                    .setConnectTimeout(3000).build();
+            httpGet.setConfig(requestConfig);
+            httpGet.setHeader("session_id", sessionId);
+            response = httpClient.execute(httpGet);
+            int status = response.getStatusLine().getStatusCode();//获取返回状态值
+            if (status == HttpStatus.SC_OK) {//请求成功
+                httpEntity = response.getEntity();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(response != null){
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(httpClient != null){
+                try {
+                    httpClient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return httpEntity;
     }
 
     private FindFaceVO getfaces(String session_id, String queryImage) throws JsonProcessingException {
@@ -243,69 +287,12 @@ public class VisitServiceImpl implements VisitService {
             System.out.println(findresult);
             findFaceVO = JSONUtil.toBean(findresult, FindFaceVO.class);
 
-            if (CollectionUtil.isNotEmpty(findFaceVO.getResults())){
-                //取图片
-                for (FaceResultVO faceResultVO:findFaceVO.getResults()) {
-                    String url = this.getpicture(faceResultVO.getFace_image_uri(), session_id);
-                    faceResultVO.setFace_image_uri(url);
-                }
-
-
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
         return findFaceVO;
-    }
-
-    private String getpicture(String face_image_uri, String session_id) {
-
-        //创建 CloseableHttpClient
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        CloseableHttpResponse response = null;
-        String result = null;
-        try {
-            URIBuilder uri = new URIBuilder(pictureProperties.getServiceurl() + "/storage/image?uri_base64=" + Base64.getEncoder().encodeToString(face_image_uri.getBytes()));
-
-            HttpGet httpGet = new HttpGet(uri.build());
-            //设置请求状态参数
-            RequestConfig requestConfig = RequestConfig.custom()
-                    .setConnectionRequestTimeout(3000)
-                    .setSocketTimeout(3000)
-                    .setConnectTimeout(3000).build();
-            httpGet.setConfig(requestConfig);
-            httpGet.setHeader("session_id", session_id);
-            response = httpClient.execute(httpGet);
-            int status = response.getStatusLine().getStatusCode();//获取返回状态值
-            if (status == HttpStatus.SC_OK) {//请求成功
-                HttpEntity httpEntity = response.getEntity();
-                if(httpEntity != null){
-                    result = EntityUtils.toString(httpEntity, "UTF-8");
-                    EntityUtils.consume(httpEntity);//关闭资源
-
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(response != null){
-                try {
-                    response.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(httpClient != null){
-                try {
-                    httpClient.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return result;
     }
 
 

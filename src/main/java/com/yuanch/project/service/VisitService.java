@@ -5,8 +5,10 @@ import com.yuanch.project.dto.FaceCheckRunningDTO;
 import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.vo.FaceVO;
+import com.yuanch.project.vo.FindFaceVO;
 import com.yuanch.project.vo.VisitDropDown;
 import com.yuanch.project.vo.VisitVO;
+import org.apache.http.HttpEntity;
 
 import java.util.List;
 
@@ -21,5 +23,7 @@ public interface VisitService  {
 
     FaceCheckDTO faceCheck(FaceVO faceVO);
 
-    FaceCheckRunningDTO faceCheckWithRunning(FaceVO faceVO);
+    FindFaceVO faceCheckWithRunning(FaceVO faceVO);
+
+    HttpEntity getPicture(String url, String sessionId);
 }

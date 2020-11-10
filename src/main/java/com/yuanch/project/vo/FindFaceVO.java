@@ -16,6 +16,6 @@ public class FindFaceVO {
 
     private Integer total;
 
-
+    private String sessionId;
 
 }

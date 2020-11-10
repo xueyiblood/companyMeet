@@ -9,10 +9,12 @@ import com.yuanch.project.dto.VisitDTO;
 import com.yuanch.project.dto.VisitSearchDTO;
 import com.yuanch.project.service.VisitService;
 import com.yuanch.project.vo.FaceVO;
+import com.yuanch.project.vo.FindFaceVO;
 import com.yuanch.project.vo.VisitDropDown;
 import com.yuanch.project.vo.VisitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.http.HttpEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -70,15 +72,15 @@ public class VisitorController  extends BaseController {
     @ApiOperation(value = "在逃人脸比对")
     @PostMapping("faceCheckWithRunning")
     public AjaxResult faceCheckWithRunning(@RequestBody FaceVO faceVO) {
-        FaceCheckRunningDTO faceCheckRunningDTO =  visitService.faceCheckWithRunning(faceVO);
-        return AjaxResult.success(faceCheckRunningDTO);
+        FindFaceVO faces =  visitService.faceCheckWithRunning(faceVO);
+        return AjaxResult.success(faces);
     }
 
     @ApiOperation(value = "取人脸图片")
-    @PostMapping("faceCheckWithRunning")
-    public AjaxResult getPicture(@RequestBody FaceVO faceVO) {
-        FaceCheckRunningDTO faceCheckRunningDTO =  visitService.faceCheckWithRunning(faceVO);
-        return AjaxResult.success(faceCheckRunningDTO);
+    @GetMapping("getPicture")
+    public AjaxResult getPicture(@RequestParam String url, @RequestParam String sessionId ) {
+        HttpEntity entity =  visitService.getPicture(url, sessionId);
+        return AjaxResult.success(entity);
     }
 
 }
