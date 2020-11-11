@@ -12,9 +12,9 @@ public class RetrievalDTO {
 
     private List<String> repository_ids ;
 
-    private Double threshold = 0d;
+    private Double threshold = 60d;
 
-    private Boolean fast = true;
+    private Boolean fast;
 
     private Integer topk = 3;
 

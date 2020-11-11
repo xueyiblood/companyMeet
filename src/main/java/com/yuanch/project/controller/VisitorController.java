@@ -1,5 +1,6 @@
 package com.yuanch.project.controller;
 
+import com.yuanch.common.config.properties.PictureProperties;
 import com.yuanch.common.web.controller.BaseController;
 import com.yuanch.common.web.domain.AjaxResult;
 import com.yuanch.common.web.domain.page.TableDataInfo;
@@ -15,10 +16,22 @@ import com.yuanch.project.vo.VisitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -28,6 +41,9 @@ public class VisitorController  extends BaseController {
 
     @Autowired
     private VisitService visitService;
+
+    @Autowired
+    private PictureProperties pictureProperties;
 
     /**
      * 条件查询访客
@@ -78,9 +94,44 @@ public class VisitorController  extends BaseController {
 
     @ApiOperation(value = "取人脸图片")
     @GetMapping("getPicture")
-    public AjaxResult getPicture(@RequestParam String url, @RequestParam String sessionId ) {
-        HttpEntity entity =  visitService.getPicture(url, sessionId);
-        return AjaxResult.success(entity);
+    public void getPicture(@RequestParam String url, @RequestParam String sessionId , HttpServletResponse httpResponse) throws Exception {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+        try {
+            URIBuilder uri = new URIBuilder(pictureProperties.getServiceurl() + "/storage/image?uri_base64=" + Base64.getEncoder().encodeToString(url.getBytes()));
+
+            HttpGet httpGet = new HttpGet(uri.build());
+            //设置请求状态参数
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectionRequestTimeout(3000)
+                    .setSocketTimeout(3000)
+                    .setConnectTimeout(3000).build();
+            httpGet.setConfig(requestConfig);
+            httpGet.setHeader("session_id", sessionId);
+            response = httpClient.execute(httpGet);
+
+            HttpEntity entity = response.getEntity();
+            ServletOutputStream outputStream = httpResponse.getOutputStream();
+            entity.writeTo(outputStream);
+            outputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if(response != null){
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(httpClient != null){
+                try {
+                    httpClient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }

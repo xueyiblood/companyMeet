@@ -36,6 +36,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -222,11 +223,8 @@ public class VisitServiceImpl implements VisitService {
             httpGet.setConfig(requestConfig);
             httpGet.setHeader("session_id", sessionId);
             response = httpClient.execute(httpGet);
-            int status = response.getStatusLine().getStatusCode();//获取返回状态值
-            if (status == HttpStatus.SC_OK) {//请求成功
-                httpEntity = response.getEntity();
 
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -259,7 +257,7 @@ public class VisitServiceImpl implements VisitService {
             Map<String, Object> findData = new HashMap<String, Object>();
             List extraList = new ArrayList();
             extraList.add("custom_field_1");
-            findData.put("extra_fields", extraList);
+//            findData.put("extra_fields", extraList);
             findData.put("order", new OrderDTO());
             findData.put("start",0);
             findData.put("limit",3);
@@ -271,8 +269,6 @@ public class VisitServiceImpl implements VisitService {
             retrievalDTO.setRepository_ids(repositoryList);
 
             findData.put("retrieval",retrievalDTO);
-            findData.put("retrieval_query_id", "48");
-
 
             HttpPost findhttpPost = new HttpPost(pictureProperties.getServiceurl() + "/retrieval_repository");
             findhttpPost.setHeader(HTTP.CONTENT_TYPE, "application/json");

@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class OrderDTO {
 
-    private Double similarity = -1d;
+    private Integer similarity = -1;
 
 }
